@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetPhoneNumberTableViewController">
+            <connections>
+                <outlet property="callView" destination="SIP-vZ-bAw" id="QN3-w4-R3U"/>
+                <outlet property="careNumBtn" destination="hQL-w6-OjA" id="R0j-tk-eXy"/>
+                <outlet property="inPutBackView" destination="HM7-1e-sVq" id="x5H-A4-aHl"/>
+                <outlet property="limitLable" destination="87t-yT-yqf" id="Tmz-9M-lQz"/>
+                <outlet property="nameField" destination="WIj-fT-5ab" id="A8p-a6-8AF"/>
+                <outlet property="numberField" destination="a68-9W-n7f" id="dSS-r6-iF8"/>
+                <outlet property="selectView" destination="75Q-gU-vFi" id="IBB-pt-8A0"/>
+                <outlet property="sosCallLabel" destination="hwz-Fd-NwA" id="bJy-gg-hpf"/>
+                <outlet property="sureBtn" destination="rMe-Do-pOf" id="WG1-j1-j4U"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="watchDownLabel" destination="7Ut-bM-p1B" id="EmA-ZB-4Ef"/>
+                <outlet property="watchUpKeyLabel" destination="kfi-n0-GVj" id="Gx8-HD-LsZ"/>
+                <outlet property="whiteNumBtn" destination="SlR-4M-M88" id="pXh-Wc-dyy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="i5M-Pr-FkT" customClass="TPKeyboardAvoidingTableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" red="1" green="1" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="sectionIndexBackgroundColor" red="1" green="1" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
+                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
+            </connections>
+            <point key="canvasLocation" x="603" y="439"/>
+        </tableView>
+        <view contentMode="scaleToFill" id="HM7-1e-sVq">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入称呼" textAlignment="center" minimumFontSize="17" background="name_bg.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WIj-fT-5ab">
+                    <rect key="frame" x="28" y="22" width="80" height="43"/>
+                    <color key="textColor" red="0.64313725489999995" green="0.47843137250000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Wz4-H1-QAS"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="（最多可以输入5个亲情号码）" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87t-yT-yqf">
+                    <rect key="frame" x="43" y="71" width="245" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMe-Do-pOf">
+                    <rect key="frame" x="268" y="29" width="30" height="30"/>
+                    <state key="normal" image="btn_yes.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="btn_yes_pre.png"/>
+                    <connections>
+                        <action selector="sureBtnClick:" destination="-1" eventType="touchUpInside" id="jCA-lF-Xq5"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  输入号码" textAlignment="center" minimumFontSize="17" background="name_bg.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="a68-9W-n7f">
+                    <rect key="frame" x="116" y="22" width="145" height="43"/>
+                    <color key="textColor" red="0.64313725489999995" green="0.47843137250000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="u5z-9r-EJo"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="161" y="341"/>
+        </view>
+        <view contentMode="scaleToFill" id="SIP-vZ-bAw">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="245"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_view.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q4P-LR-M73">
+                    <rect key="frame" x="7" y="80" width="283" height="1"/>
+                    <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手表下键呼叫" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-bM-p1B">
+                    <rect key="frame" x="8" y="91" width="229" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手表上键呼叫" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfi-n0-GVj">
+                    <rect key="frame" x="9" y="8" width="244" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dxz-JY-hbG">
+                    <rect key="frame" x="0.0" y="160" width="300" height="85"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SOS呼叫:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwz-Fd-NwA">
+                            <rect key="frame" x="9" y="7" width="117" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="151" y="600.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="75Q-gU-vFi">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQL-w6-OjA">
+                    <rect key="frame" x="78" y="10" width="84" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="亲情号" backgroundImage="careNum.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="亲情号" backgroundImage="careNum_press"/>
+                    <connections>
+                        <action selector="changeNumType:" destination="-1" eventType="touchUpInside" id="mAS-et-Q9L"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlR-4M-M88">
+                    <rect key="frame" x="160" y="10" width="85" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="白名单" backgroundImage="whitePlist.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="白名单" backgroundImage="whitePlist_press.png"/>
+                    <connections>
+                        <action selector="changeNumType:" destination="-1" eventType="touchUpInside" id="Aco-nz-OG8"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="122" y="203"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_yes.png" width="19" height="19"/>
+        <image name="btn_yes_pre.png" width="19" height="19"/>
+        <image name="careNum.png" width="85" height="34"/>
+        <image name="careNum_press" width="580" height="80"/>
+        <image name="line_view.png" width="1" height="1"/>
+        <image name="name_bg.png" width="58" height="33"/>
+        <image name="whitePlist.png" width="85" height="34"/>
+        <image name="whitePlist_press.png" width="85" height="34"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

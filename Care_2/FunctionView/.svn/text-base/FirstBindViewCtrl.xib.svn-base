@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstBindViewCtrl">
+            <connections>
+                <outlet property="genderControl" destination="KR7-Fb-blO" id="HcJ-Og-lHg"/>
+                <outlet property="heightField" destination="2Kj-Ci-yO5" id="wUA-uX-TaS"/>
+                <outlet property="nameField" destination="QzD-Fw-U70" id="fgD-4N-9mk"/>
+                <outlet property="saveBtn" destination="MJh-sn-Hec" id="pjL-g0-qaZ"/>
+                <outlet property="simIDField" destination="zcG-P7-eLc" id="Bmo-tz-V9J"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weightField" destination="3AA-sc-vHr" id="BoB-9E-EcE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入设备号" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="zcG-P7-eLc">
+                    <rect key="frame" x="52" y="103" width="284" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入宝贝身高" minimumFontSize="17" background="input" translatesAutoresizingMaskIntoConstraints="NO" id="2Kj-Ci-yO5">
+                    <rect key="frame" x="52" y="269" width="284" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入宝贝体重" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3AA-sc-vHr">
+                    <rect key="frame" x="52" y="329" width="284" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入宝贝名字" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QzD-Fw-U70">
+                    <rect key="frame" x="52" y="210" width="284" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KR7-Fb-blO">
+                    <rect key="frame" x="96" y="162" width="123" height="29"/>
+                    <segments>
+                        <segment title="男"/>
+                        <segment title="女"/>
+                    </segments>
+                    <connections>
+                        <action selector="genderChange:" destination="-1" eventType="valueChanged" id="uZM-md-THM"/>
+                    </connections>
+                </segmentedControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="性别" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CL-w3-aP1">
+                    <rect key="frame" x="52" y="165" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJh-sn-Hec">
+                    <rect key="frame" x="107" y="387" width="161" height="38"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="保存" backgroundImage="btn_del"/>
+                    <state key="highlighted" backgroundImage="btn_del_pre"/>
+                    <connections>
+                        <action selector="saveBtnClick:" destination="-1" eventType="touchUpInside" id="wtb-5G-JAQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="392.5" y="292.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_del" width="16" height="16"/>
+        <image name="btn_del_pre" width="16" height="16"/>
+        <image name="input" width="16" height="16"/>
+    </resources>
+</document>

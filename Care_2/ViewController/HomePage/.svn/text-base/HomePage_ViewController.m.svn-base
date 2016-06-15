@@ -1,0 +1,637 @@
+//
+//  HomePage_ViewController.m
+//  Care
+//
+//  Created by Vecklink on 14-7-7.
+//
+//
+
+#import "HomePage_ViewController.h"
+#import "HomePage_WeatherView.h"
+#import "HomePage_DevicesView.h"
+#import "Nav_ViewController.h"
+#import "RemoteCare_ViewController.h"
+#import "QrcodeScanningVC.h"
+#import "GuideViewController.h"
+#import "TestMapViewController.h"
+#import "OperationQueue.h"
+#import "AppDelegate.h"
+#import "DataBaseSimple.h"
+#import "HeartRateViewController.h"
+#import "SetPhoneNumberTableViewController.h"
+#import "StepViewController.h"
+
+#import "SearchDeviceViewController.h"
+
+
+
+
+@interface HomePage_ViewController ()<UIAlertViewDelegate> {
+    
+  
+    __weak IBOutlet UIButton *loginButton;
+    __weak IBOutlet UIButton *registerButton;
+    __weak IBOutlet UIImageView *AdImageView;
+    __weak IBOutlet UILabel *devElectricityLabel;
+    UIButton *avatarButton;
+    UILabel *userNameLabel;
+    
+    __weak IBOutlet UIButton *remoteButton; //远程看护
+    __weak IBOutlet UIButton *aroundButton; // 在身边
+    __weak IBOutlet UIButton *trackHisButton;// 轨迹查看
+    __weak IBOutlet UIButton *heartRateButton;// 心率
+    __weak IBOutlet UIButton *stepHisButton;// 记步
+    __weak IBOutlet UIButton *fenceBtn;//电子围栏
+    
+    HomePage_DevicesView *devsView;// 设备视图
+    HomePage_WeatherView *weatherView;// 天气视图
+    
+    DeviceModel *selectDevice_;// 被选中的设备
+    ASIHTTPRequest *req;
+    NSMutableArray *dataArr;
+    
+    dispatch_queue_t _globalQueue;
+    
+}
+- (IBAction)onLoginButtonPressed:(UIButton *)sender;
+- (IBAction)onRegisterButtonPressed:(UIButton *)sender;
+- (IBAction)onStartCareButtonPressed:(UIButton *)sender;
+- (IBAction)onRemoteCareButtonPressed:(UIButton *)sender;
+- (IBAction)onAroundButtonPressed:(UIButton *)sender;
+- (IBAction)onMessageCenterButtonPressed:(UIButton *)sender;
+- (IBAction)fenceBtnClick:(UIButton *)sender;
+@end
+
+@implementation HomePage_ViewController
+
+
+-(void)dealloc {
+    [req clearDelegatesAndCancel];
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    _globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dataArr = [NSMutableArray array];
+    
+    /**
+     *  自动登录
+     */
+    NSString *uid = [[NSUserDefaults standardUserDefaults] stringForKey:@"AccountUid"];
+    if (uid && ![uid isEqualToString:@""]) {
+        [[UserData Instance] autoLoginWithUid:uid type:0];
+    }
+    
+    NSLog(@"uid =%@", [UserData Instance].uid);
+    NSLog(@"session =%@", [UserData Instance].sessionId);
+    
+    // 禁用记步和心率点击事件
+    stepHisButton.enabled = NO;
+    heartRateButton.enabled = NO;
+    
+    
+    
+    [[SocketClient Instance] setDidDevElectricityChange:^(DeviceModel *dev){
+    
+        dev = selectDevice_;
+        devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), dev.electricity];
+
+    }];
+    
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = YES;
+    [self refreshUIWithIsLogin];
+
+    [devsView refreshDevicesView]; // 刷新设备列表请求
+    
+    //引导页
+    if ([self isFirstRun]) {
+        GuideViewController *lead = [[GuideViewController alloc] initWithNibName:@"GuideViewController" bundle:nil];
+        [self presentViewController:lead animated:NO completion:nil];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+-(void)refreshUIWithIsLogin {
+    if (!weatherView) {
+        weatherView = [[NSBundle mainBundle] loadNibNamed:@"HomePage_WeatherView" owner:nil options:nil][0];
+        weatherView.frame = CGRectMake(0, 80, 320, 110);
+        [self.view addSubview:weatherView];
+    }
+    BOOL isLogin = [[UserData Instance] isLogin];
+    
+    NSLog(@"------------------------------------------------------");
+    if (isLogin) {
+        
+        //登录后
+        NSLog(@"isLogin");
+        if (!avatarButton) {            //创建头像Button
+            avatarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            avatarButton.frame = CGRectMake(15, 25, 50, 50);
+            UIImage *avatarImage = [UIImage imageWithData:[UserData Instance].avatarData];
+            if (!avatarImage) {
+                [UserData Instance].avatarData = UIImagePNGRepresentation([UIImage imageNamed:@"icon_default_head_1"]);
+            }
+            
+            [avatarButton addTarget:self action:@selector(onAvatarButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+            avatarButton.layer.cornerRadius = 7;
+            avatarButton.layer.masksToBounds = YES;
+            [self.view addSubview:avatarButton];
+        }
+        
+        if (!userNameLabel) {           //创建昵称Label
+            userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 40, 200, 20)];
+            userNameLabel.textColor = _Color_font1;
+            userNameLabel.font = [UIFont boldSystemFontOfSize:14];
+            [self.view addSubview:userNameLabel];
+        }
+
+        if (!devsView) {//设备列表
+            devsView = [[NSBundle mainBundle] loadNibNamed:@"HomePage_DevicesView" owner:nil options:nil][0];
+            devsView.navigationController = self.navigationController;
+            devsView.frame = AdImageView.frame;
+            
+            __block UILabel *devEleLabel = devElectricityLabel;
+            
+            
+            [devsView setDidDevSelected:^{//设备被选中的回调
+                DeviceModel *dev = [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+                selectDevice_=dev;
+                __APP.eqPhoneNum = selectDevice_.phoneNumber;
+                devEleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), dev.electricity];
+                devEleLabel.hidden = !dev.online;
+               // aroundButton.userInteractionEnabled = dev.online;
+              //  remoteButton.userInteractionEnabled = dev.online;
+                if (!dev.online) {//根据设备在线与否设定在身边按钮的图片
+                    [aroundButton setImage:[UIImage imageNamed:@"main_around_tv_off_line"] forState:UIControlStateNormal];
+                }else{
+                    [aroundButton setImage:[UIImage imageNamed:@"01_btn_bottom_around"] forState:UIControlStateNormal];
+                }
+            }];
+            
+            __block HomePage_ViewController *vc = self;
+            [devsView setDidRequestDevListFinish:^{
+                NSLog(@"============");
+                [vc refreshUIWithIsLogin];
+            }];
+            
+            [self.view addSubview:devsView];
+            [self.view bringSubviewToFront:AdImageView];
+            
+            
+            //开始请求列队
+            [[OperationQueue Instance] setDidDevOnlineChange:^(DeviceModel *dev) {
+                
+                [devsView refreshDeviceOnlineState:dev];//更换设备图标
+                [aroundButton setImage:[UIImage imageNamed:@"main_around_tv_off_line"] forState:UIControlStateNormal];
+                aroundButton.selected = NO;
+                fenceBtn.selected = NO;
+                if (isLogin && [UserData Instance].deviceDic.count) {
+                    for (DeviceModel *dev in [UserData Instance].deviceDic.allValues) {
+                        if (dev.online) {
+                            [aroundButton setImage:[UIImage imageNamed:@"01_btn_bottom_around"] forState:UIControlStateNormal];
+                            aroundButton.selected = YES;//便利设备列表如果还有在线身边就把在身边按钮设置为选中
+                            fenceBtn.selected = YES;
+                            
+                            devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), dev.electricity];
+                        }
+                    }
+                }
+                
+//                devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), ((DeviceModel *)[UserData Instance].deviceDic[[UserData Instance].likeDevIMEI]).electricity];
+                
+                devElectricityLabel.hidden = !dev.online;
+            }];
+            //设备在线状态改变
+            [[SocketClient Instance] setDidDevOnlineChange:^(DeviceModel *dev) {
+                [devsView refreshDeviceOnlineState:dev];
+                
+                [aroundButton setImage:[UIImage imageNamed:@"main_around_tv_off_line"] forState:UIControlStateNormal];
+                aroundButton.selected = NO;
+                fenceBtn.selected = NO;
+                if (isLogin && [UserData Instance].deviceDic.count) {
+                    for (DeviceModel *dev in [UserData Instance].deviceDic.allValues) {
+                        if (dev.online) {
+                            [aroundButton setImage:[UIImage imageNamed:@"01_btn_bottom_around"] forState:UIControlStateNormal];
+                            aroundButton.selected = YES;
+                            fenceBtn.selected = YES;
+                        }
+                    }
+                }
+                
+                devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), ((DeviceModel *)[UserData Instance].deviceDic[[UserData Instance].likeDevIMEI]).electricity];
+                
+                devElectricityLabel.hidden = !dev.online;
+            }];
+        }
+        
+        [[OperationQueue Instance] login];
+        //开启Socket
+        [[SocketClient Instance] connectToHost];
+    }
+    
+    //没有登录时和登录时的默认配置
+    [avatarButton setImage:[UIImage imageWithData:[UserData Instance].avatarData] forState:UIControlStateNormal];
+    userNameLabel.text = [UserData Instance].nickName;
+    
+    AdImageView.hidden = [UserData Instance].deviceDic.count;
+    loginButton.hidden = isLogin;
+    registerButton.hidden = isLogin;
+    
+    avatarButton.hidden = !isLogin;
+    userNameLabel.hidden = !isLogin;
+    
+    [aroundButton setImage:[UIImage imageNamed:@"main_around_tv_off_line"] forState:UIControlStateNormal];
+    aroundButton.selected = NO;
+    fenceBtn.selected = NO;
+    
+    if (isLogin && [UserData Instance].deviceDic.count) {//如果已经登陆且设备列表有值
+        for (DeviceModel *dev in [UserData Instance].deviceDic.allValues) {
+            if (dev.online) {//如果有在线设备就设置背景图片和选中状态
+                [aroundButton setImage:[UIImage imageNamed:@"01_btn_bottom_around"] forState:UIControlStateNormal];
+                aroundButton.selected = YES;
+                fenceBtn.selected = YES;
+                
+                if ([UserData Instance].deviceDic.count<=2) {
+                    devElectricityLabel.hidden = NO;
+//                    devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), dev.electricity];
+                    
+//                    devElectricityLabel.text = [NSString stringWithFormat:NSLocalizedString(@"当前设备电量：%d%%", nil), ((DeviceModel *)[UserData Instance].deviceDic[[UserData Instance].likeDevIMEI]).electricity];
+                }
+            }
+        }
+    } else {
+        devElectricityLabel.hidden = YES;
+    }
+    
+//    DeviceModel *dev2 = [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+//    [[MusicPlayerController Instance] playWithMusicItem:dev2.musicItem isStop:YES];
+}
+
+-(void)onAvatarButtonPressed {
+    Userinfo_TableViewController *userinfoTVC = [[Userinfo_TableViewController alloc] initWithNibName:@"Userinfo_TableViewController" bundle:nil];
+    [self.navigationController pushViewController:userinfoTVC animated:YES];
+}
+
+- (IBAction)onLoginButtonPressed:(UIButton *)sender {
+    Login_ViewController *loginVC = [[Login_ViewController alloc] initWithNibName:@"Login_ViewController" bundle:nil];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+- (IBAction)onRegisterButtonPressed:(UIButton *)sender {
+    RegisterPage_ViewController *registerVC = [[RegisterPage_ViewController alloc] initWithNibName:@"RegisterPage_ViewController" bundle:nil];
+    [self.navigationController pushViewController:registerVC animated:YES];
+}
+- (IBAction)onStartCareButtonPressed:(UIButton *)sender {//扫码添加设备
+    if ([[UserData Instance] isLogin]) {
+        
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        if (authStatus == AVAuthorizationStatusAuthorized) {
+            
+            DLog(@"相机服务已开启");
+            
+            QrcodeScanningVC *scanVC = [[QrcodeScanningVC alloc] init];
+            [self.navigationController pushViewController:scanVC animated:YES];
+
+        }else if (authStatus == AVAuthorizationStatusDenied){
+            
+            DLog(@"相机服务未开启..");
+            
+            UIAlertView *alertVC = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请到系统设置里打开相机服务" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+             alertVC.delegate = self;
+            [alertVC show];
+            return;
+            
+        }else if (authStatus == AVAuthorizationStatusNotDetermined){
+            
+            DLog(@"系统还未知是否访问，第一次开启相机时");
+            
+            QrcodeScanningVC *scanVC = [[QrcodeScanningVC alloc] init];
+            [self.navigationController pushViewController:scanVC animated:YES];
+        }
+        
+    } else {
+        [self onLoginButtonPressed:nil];
+    }
+}
+
+/**
+ *  远程看护
+ *
+ *  push到"获取位置,声音监听,通话,设定闹钟"
+ */
+- (IBAction)onRemoteCareButtonPressed:(UIButton *)sender {
+    
+    if ([[UserData Instance] isLogin]) {
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+        
+        if (selectDevice_.online) {
+            RemoteCare_ViewController *remoteCareVC = [[RemoteCare_ViewController alloc] initWithNibName:@"RemoteCare_ViewController" bundle:nil];
+            remoteCareVC.selDev = [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+            [self.navigationController pushViewController:remoteCareVC animated:YES];
+        }
+        
+    } else {
+        
+        [self onLoginButtonPressed:nil];
+    }
+
+    
+}
+/**
+ *  在身边
+ *
+ *  push到"关爱在身边"
+ */
+- (IBAction)onAroundButtonPressed:(UIButton *)sender {
+    
+
+    if ([[UserData Instance] isLogin]) {
+        
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+
+       
+//        if (!aroundButton.selected) {
+//            return;
+//        }
+        
+        SearchDeviceViewController *searchVC = [[SearchDeviceViewController alloc] initWithNibName:@"SearchDeviceViewController" bundle:nil];
+        [self.navigationController pushViewController:searchVC animated:YES];
+
+        
+    } else {
+        [self onLoginButtonPressed:nil];
+    }
+ 
+}
+
+/**
+ *  消息中心
+ *
+ * push到 列表展示关爱围栏预警消息
+ */
+
+- (IBAction)onMessageCenterButtonPressed:(UIButton *)sender {
+    
+    
+    if ([[UserData Instance] isLogin]) {
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+        
+        MessageCenter_ViewController *messageCenterVC = [[MessageCenter_ViewController alloc] initWithNibName:@"MessageCenter_ViewController" bundle:nil];
+        messageCenterVC.selDev = [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+        [self.navigationController pushViewController:messageCenterVC animated:YES];
+    } else {
+        [self onLoginButtonPressed:nil];
+    }
+}
+
+/**
+ *
+ *  电子围栏
+ *
+ */
+- (IBAction)fenceBtnClick:(UIButton *)sender {
+    
+    if ([[UserData Instance] isLogin]) {
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+        
+        if (!fenceBtn.selected) {
+            return;
+        }
+        Around_TableViewController *aroundTVC = [[Around_TableViewController alloc] initWithNibName:@"Around_TableViewController" bundle:nil];
+        aroundTVC.devModel=selectDevice_;
+        [self.navigationController pushViewController:aroundTVC animated:YES];
+        
+        
+    } else {
+        [self onLoginButtonPressed:nil];
+    }
+
+}
+
+/**
+ *   轨迹查看
+ *
+ *  push到 地图展示设备历史的轨迹记录
+ */
+- (IBAction)trackHistoryButtonPressed:(UIButton *)sender {
+    
+
+    if ([[UserData Instance] isLogin]) {
+        
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+
+        
+        
+        /**
+         *  获取设备轨迹更新请求
+         */
+//        dispatch_async(_globalQueue, ^{
+//            
+//            [self requestChildDevData];
+//            
+//        });
+        
+        // 跳转到测试的地图中
+        TestMapViewController *test = [[TestMapViewController alloc] init];
+        //     NSArray *childArr = [[NSArray alloc] initWithArray:dataArr];// 深拷贝数组
+//        test.childLocationArr = dataArr;
+        test.devObj = selectDevice_;
+        NSLog(@"----------------dataArr is %@",dataArr);
+        
+        [self.navigationController pushViewController:test animated:YES];
+      
+    } else {
+        [self onLoginButtonPressed:nil];
+    }
+}
+
+/**
+ *  心率
+ *
+ *  @param sender 实时推送设备记录的心率数据，保存记录可供查看历史
+ */
+
+- (IBAction)heartRateButtonPressed:(UIButton *)sender {
+    
+    if([[UserData Instance] isLogin]){
+        
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+
+        HeartRateViewController *heartVC = [[HeartRateViewController alloc]initWithNibName:@"HeartRateViewController" bundle:nil];
+        heartVC.selDev = [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+        [self.navigationController pushViewController:heartVC animated:YES];
+    }else{
+    
+        [self onLoginButtonPressed:nil];
+    }
+}
+
+/**
+ *  记步
+ *
+ *  @param sender 设备记录小孩运动步数，计算距离和卡路里，保存可供查询记录
+ */
+- (IBAction)stepDownButtonPressed:(UIButton *)sender {
+    
+    if ([[UserData Instance] isLogin]) {
+        
+        if (![UserData Instance].deviceDic.count) {
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] initStyleZeroWithTitle:NSLocalizedString(@"提示", nil) message:NSLocalizedString(@"请先选择/添加设备", nil)];
+            [alertView show];
+            return;
+        }
+        
+        StepViewController *stepVC = [[StepViewController alloc] initWithNibName:@"StepViewController" bundle:nil];
+        stepVC.selDev =  [UserData Instance].deviceDic[[UserData Instance].likeDevIMEI];
+        [self.navigationController pushViewController:stepVC animated:YES];
+    }else{
+    
+          [self onLoginButtonPressed:nil];
+    }
+   
+    
+}
+
+
+//判断是否第一次运行程序
+- (BOOL)isFirstRun
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"IsFirstRead"]) {
+        [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"IsFirstRead"];
+        [defaults synchronize];
+        return YES;
+    }
+    return NO;
+}
+
+-(void)requestChildDevData{
+    
+    
+//    NSDate *now = [NSDate date];
+//    NSDateFormatter *dateformat=[[NSDateFormatter alloc] init];
+//    [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSString *stopTime = [dateformat stringFromDate:now];
+//    
+//    NSDate *startDate = [[NSDate alloc] initWithTimeIntervalSinceNow:-7200];
+//    NSString *startTime = [dateformat stringFromDate:startDate];
+    
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateformat=[[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString  *stopTime = [dateformat stringFromDate:now];
+    
+    
+    [dateformat setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [dateformat stringFromDate:now];
+    NSString  *startTime =[NSString stringWithFormat:@"%@ 00:00:00",str];
+    
+
+    DLog(@"------%@",selectDevice_.bindIMEI);
+    NSMutableDictionary *signInfo = [NSMutableDictionary dictionary];
+    [signInfo setValue:_Interface_user_gettrackdata forKey:@"method"];
+    [signInfo setValue:[UserData Instance].uid forKey:@"uid"];
+    [signInfo setValue:selectDevice_.bindIMEI forKey:@"eqId"];
+    [signInfo setValue:startTime forKey:@"start"];
+    [signInfo setValue:stopTime forKey:@"stop"];
+
+    
+    [signInfo setValue:[UserData Instance].sessionId forKey:@"session"];
+    NSString *sign = [MD5 createSignWithDictionary:signInfo];
+    NSString *urlStr = [MD5 createTrackUrlWithDictionary:signInfo Sign:sign];
+    
+//    NSString *urlStr = [MD5 createTrackUrlWithDictionary:signInfo];
+    
+    NSLog(@"urlStr is %@....",urlStr);
+    req = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlStr]];
+    [req addRequestHeader:[MD5 getUserAgent] value:@"User-Agent"];
+    
+    req.delegate = self;
+    req.tag = 70;
+    [req startAsynchronous];
+    _Code_ShowLoading
+
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    _Code_HiddenLoading
+    NSLog(@"Response :%@", [request responseString]);
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:[request responseData] options:NSJSONReadingMutableContainers error:nil];
+    _Code_HTTPResponseCheck(jsonDic, {
+        if (request.tag == 70) {
+//            DataBaseSimple *simple = [DataBaseSimple shareInstance];
+            for (NSDictionary *devDic in jsonDic[@"track"]) {
+        
+                NSLog(@"获取设备轨迹成功！");
+                ChildDev *model = [[ChildDev alloc] init];
+                model.latitude=devDic[@"la"];
+                model.longitude=devDic[@"lo"];
+                model.date = devDic[@"time"];
+                [dataArr addObject:model];
+//                [simple insertIntoDB:model];// 插入数据库
+                
+            }
+            
+        }        
+        
+    })
+}
+_Method_RequestFailed()
+
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    
+    if(buttonIndex == 0)
+    {
+        
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0f) {
+            
+            // 这是iOS8改动的功能,应用内跳转到系统设置页面
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            
+        }
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Photos"]];
+    }
+}
+
+@end

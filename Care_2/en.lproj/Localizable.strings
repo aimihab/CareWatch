@@ -1,0 +1,324 @@
+/* 
+  Localizable.strings
+  Care_2
+
+  Created by JIA on 14-8-11.
+  Copyright (c) 2014年 Joe. All rights reserved.
+*/
+
+
+/*------------HTTP请求返回提示----------- */
+ 
+ 
+ 
+
+
+/*-------------------弹窗提示----------------*/
+"邮箱 %@ 已被使用，请换其它邮箱注册"="The mailbox %@ is already in use, please change to other registered mail.";
+
+"该邮箱已被使用，请换其他邮箱注册"="The mailbox is already in use, please change to other registered mail.";
+"邮箱格式不正确" = "Wrong email address ";
+"密码由6-16位数字、字母组成，不可包含空格和特殊字符" = "The password requires 6-16 alphanumeric, not include space & special characters";
+"请输入6-16位密码，不能包含特殊字符"="Pls. enter passwrod with 6-16 digits, no special characters";
+"请先选择/添加设备"="Please select/add equipment";
+"操作失败"="Operation failed";
+"帐号已下线，请重新登录"="The account has been off the assembly line, please re login";
+"连接失败"="Connection failed";
+"A connection failure occurred"="A connection failure occurred";
+"服务不可用" = "Service not available";
+"%@电量不足，请及时充电 \n设备号：%@，电量：%d"="%@ battery low, pls. recharge \nDevice No.%@, battery:%d";
+
+"两次密码输入不一致，请重新输入" = "Enter wrong password twice, pls. retry.";
+"亲，您还没将定位功能打开哟，赶紧打开吧！" = "Dear, You haven’t turned on positioning feature, pls. turn on quickly";
+"删除当前设备，走吧平台将不能提供服务" = "Delete the current device, Onemeter won’t provide service";
+"用户名或密码错误，请检查用户名和密码." = "Email Address or password is incorrect, please check.";
+"密码重置邮件发送成功，请到邮箱验证后登录" = "We have sent a password resetting email, pls. login after verifying.";
+"您还没有设置昵称"="You have not set up a nickname";
+"设备 %@ 不存在"="Device %@ not exist";
+"设备电量低,请及时充电!"=" watch battery is low! Please recharge in time";
+
+
+
+/* -------------------主页面，共用，杂，未用到---------------------- */
+"星期一"= "Monday";
+"星期二"= "Tuesday";
+"星期三"= "Wednesday";
+"星期四"= "Thursday";
+"星期五"= "Friday";
+"星期六"= "Saturday";
+"星期日"= "Sunday";
+"删除" = "Delete";
+"取消" = "Cancel";
+"确定"="OK";
+"我" = "Me";
+"提示" = "Alerts";
+"提交" = "Submit";
+"保存" = "Save";
+"提醒" = "Remind";
+"无" = "No";
+"未填写" = "Not filled";
+"拍照"="Take Photo";
+"选择本地图片"="Select loc";
+"当前设备电量：%d%%" = "Current device power:%d%%";
+"您还没有添加设备哦" = "You haven’t added device.";
+//未用到预留的
+"您还没有选择铃声" = "You haven’t chosen the ring.";
+"选择铃声" = "Select the ring";
+"没有找到音乐" = "Unfound music";
+"手机号码格式不正确，请输入正确的手机号码" = "Wrong format, pls. enter right phone No.";
+
+/* -------------------注册登录，注销，忘记密码----------------- */
+"登录"="Login";
+"注册帐号"="Register Account";
+"注册协议" = "Registration agreement";
+"注册走吧帐号" = "Register Movnow Account";
+
+"用户名不能为空" = "User name cann’t be empty";
+"请输入邮箱名" ="Please enter the e-mail name";
+
+"未注册" = "is not registered";
+"邮箱 " = "The mailbox";
+"邮箱 %@ 未注册" = "The mailbox %@ is not registered";
+"邮箱  未注册" = "The mailbox is  not registered";
+"忘记密码" = "Forgot password";
+"下一步" = "Next";
+"保存成功" = "Saved Success";
+"修改密码" = "Change password";
+"修改成功" = "Changed successfully";
+"恭喜您成功注册走吧帐号。"="Congratulations,You Onemeter account has been registered successfully.";
+"您的走吧号为："="Your Onemeter account is:";
+"您可以使用您的邮箱进行登录！"="You can use email address to login.";
+"返回登录页面"="Back to the login page.";
+"退出登录" = "Log out";
+"退出走吧将接收不到走吧的服务，您确定？" = "Are you sure to logout?";
+"请确认是否已经阅读《走吧注册协议》" = "Pls. make sure whether read Movnow users registration agreement or not";
+
+
+/*------------------用户信息-------------------*/
+"个人信息" = "Personal Info";
+"走吧帐号" = "Movnow account";
+"安全与隐私" = "Security and privacy";
+"我的设备" = "My device";
+"昵称" = "Nickname";
+"昵称不能为空" = "Nickname cannot be empty.";
+"只能是1-8个汉字、字母、数字、或随意组合"="Only 1-20 characters or alphanums or combine random.";
+"修改昵称" = "Change nickname";
+"关于走吧" = "About Movnow";
+"大宝"="dabao";
+// 安全与隐私
+"请输入你的手机号" = "Pls. enter your phone No.";
+"请输入当前密码" = "Pls. enter current password";
+"请输入新密码" = "Pls. enter new password";
+"请输入确认密码" = "Pls. enter confirming password";
+"请输入密码" = "Pls. enter password";
+//关于走吧
+"走吧关爱"="Movnow Care";
+"欢迎页" = "Welcome page";
+"欢迎使用关爱APP，时刻关爱您的小孩" = "Welcome to Care App, Care about your baby anytime.";
+"版权所有 ©2015 MOVNOW"="Copyright ©2015 MOVNOW All Right Reserved";
+
+"意见反馈" = "Feedback";
+"您还没有输入反馈意见" = "You haven’t entered feedbacks.";
+"感谢您对走吧提出宝贵的意见。"="Thanks for your advice to Onemeter.";
+"提交成功" = "Submitted successfully";
+
+
+/* ----------------------- 绑定流程 ---------------------*/
+
+"扫描二维码或条形码" = "Scan";
+"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别" = "The qr code image on rectangular box, from mobile phone camera 10 cm, the system will automatically identify";
+"扫描的内容格式不正确!" = "Scan the content format is not correct!";
+"设备名称" = "Device name";
+"设备手机号" = "Device phone No.";
+"请填写设备名" = "Pls. fill in device name";
+
+
+"请输入设备IMEI号：" = "Pls. enter device IMEI No.";
+"请输入设备手机号" = "Pls. enter device phone No.";
+"请输入邮箱名" = "Pls. enter email address";
+"帐号" = "Account";
+
+/* ---------------------------------------设备定义----------------------------------------- */
+"设备定义" = "Device definition";
+"设备IMEI号" = "Device IMEI NO.";
+"设备ID号"="Device ID";
+"头像" = "Profile photo";
+"预警声音" = "Warning sounds";
+"设备详细信息"="More about device";
+"设置亲情号码"="Set family numbers";
+"设备关机"="Device power off";
+"情景模式"="Sence Mode";
+"低电量提醒" = "Low battery alarm";
+"电量低于30%%以下提醒充电" = "Remind to recharge when battery lower 30%";
+"删除设备" = "Delete device";
+"是否确定要让设备关机?"="Are you sure you want the device to be turned off?";
+"对不起,非管理员无此权限操作"="Sorry,not the administrator without permission";
+"你没有设备关机的操作权限"="NO power off operation authority";
+"你没有情景模式的操作权限"="NO sence mode operation authority";
+"你没有定位模式的操作权限"="NO positioning mode operation authority";
+
+
+//--------------------设备详细信息设置
+"详细信息设置"="More information";
+"性别:"="Gender:";
+"性别" = "Gender";
+"男" = "Male";
+"女" = "Female";
+"请输入宝贝的名称"="Pls. enter the baby's name";
+"请输入宝贝的身高"="Pls. enter your baby's height";
+"请输入宝贝的体重"="Pls. enter your baby's weight";
+"请输入设备的SIM卡号"="Pls. enter the baby's SIM number";
+"宝贝名称不能为空"="Baby's name cannot be empty";
+"请输入正确的详细信息"="Please enter the correct details";
+
+//---------------------设置亲情号码
+"亲情号码"="Family numbers";
+"亲情号"="Family NO.";
+"白名单"="White list";
+"设置号码"="Set the number";
+"最多可以输入5个亲情号码"="Only 5 family numbers";
+"设置亲情号码不能超过5个"="No more than 5 family numbers";
+"设置白名单号码不能超过10个"="No more than 10 white list numbers";
+"输入称呼"="Enter Name";
+"输入号码"="Enter Number";
+"手表上键呼叫"="Up key call";
+"手表下键呼叫"="Below key call";
+"SOS呼叫"="SOS call";
+"请设置手表上下键"="Please set the watch up and down keys";
+"非法手机号"="Phone number format is wrong";
+"名字太长" = "The name length is too long";
+"姓名或者手机号为空"="Name or phone number is empty";
+"姓名重复"="The name is repeated.";
+"手机号码重复"="The Cell phone number is repeated.";
+//------------------------情景模式
+"标准模式"="Standard mode";
+"静音模式"="Silent mode";
+"设备在开机之后来电、闹钟、提醒时候有铃声"="The device will ring when having in-coming call/alarm/warming";
+"设备在开机之后来电、闹钟、提醒时候没有铃声"="The device will not ring when having in-coming call/alarm/warming";
+//------------------------定位模式
+"定位模式"="Positioning Mode";
+"普通模式"="Normal mode";
+"高精度模式"="Precision mode";
+"默认模式,省电"="Default mode, power saving";
+"高精准定位,耗电量大"="High precision positioning, power consumption";
+
+/* ----------------------消息中心------------------------ */
+"消息中心" = "Message center";
+"已读"="Read";
+
+"消息详情"="Message Detail";
+"没有更多的历史记录了"="No more records";
+"消息记录"="Message record";
+
+/* ----------------------电子围栏------------------------ */
+"电子围栏"="Electronic Fence";
+"您还没有围栏的对象哦，点击右上角可以添加围栏"="Have not set the fence object,click on the top right corner to add a fence";
+"围栏详情"="More about Fence";
+"围栏(请长按地图目标位置设置围栏)"="Fence(please long press the position on the map)";
+"为中心，半径"=" As the center, radius of ";
+"米"=" M ";
+"进入预警"="Into warning";
+"离开预警"="Off warning";
+"请输入大于200米且小于5000米的关爱距离" = "Pls enter warming distance within 200 meters to 5000 meters!";
+"围栏区域还未设置" = "Fence area has not set yet";
+"围栏范围重复" = "Fence range overlapped";
+"取消定位"="Cancel Positioning";
+"地图查看"="Map checking";
+"米范围"="M.";
+"预设"="Preset";
+"抱歉，未找到结果!" = "Sorry, no result!";
+"预设%d米范围" = "Preset %d meter distance";
+"要取消对 %@ 的预警吗？" = "Cancel warning about %@ or not";
+"手表围栏预警已触发,请立刻查看处理"="Watch fence warning has triggered,please immediately for processing";
+
+//----------围栏地图查看
+"地图" = "Map";
+"围栏地图"="Map of fence";
+"加载中..."="Loading...";
+"设备电量:" = "Device Power:";
+"     预警距离%d米" = "  Warning distance %d meters";
+"提示：设置时间越短，位置显示的实时性越强！" = "Alert: The setting time is shorter, the location is more accurate.";
+"正在定位，请稍等" = "positioning, pls. wait a moment.";
+"未搜寻到设备所在位置" = "Not searched the device location";
+"编辑" = "Edit";
+
+/*---------------------远程看护-----------------------*/
+"远程看护" = "Remote supervision";
+"获取位置"="Get Position";
+"记录位置" = "Record";
+"记录闹钟"="Record";
+"记录成功" = "Record successfully";
+"声音监听"="Audio monitor";
+"通话"="Call";
+"设定闹钟"="Alarm clock";
+"闹钟"="Alarm clock";
+"删除闹钟"="Delete alarm clock";
+"距离闹钟时间还有:"="The countdown:";
+"一"="Mon";
+"二"="Tue";
+"三"="Web";
+"四"="Thu";
+"五"="Fri";
+"六"="Sat";
+"日"="Sun";
+
+"设置闹钟提醒在"="Set the alarm clock to remind on";
+"删除了闹钟"="delete alarm clock on";
+"选择重复周期"="Choose the repeat period";
+"请选择重复周期"="Please choose the repeat period";
+"设备没有设定闹钟"="The equipment is not set the alarm clock";
+"闹钟时间为空,无法记录"="Alarm clock time is empty, can not be recorded";
+"上午"="Am";
+"下午"="Pm";
+"历史记录"="historic records";
+"删除成功"="Delete success";
+"未设定闹钟" = "No alarm clock";
+
+/*---------------------搜索蓝牙,在身边功能--------------------*/
+"在身边" = "Nearby";
+"搜索设备"="Search device";
+"我的设备"="My device";
+"连接成功"="connection successful";
+"已开启 %@ 在身边"="%@'with me'has been opened";
+"当设备远离您的手机,将会预警提醒"="When the device away from your mobile phone,will be warning to remind";
+"无法连接蓝牙无法开启在身边"="Unable to connect Bluetooth to the side";
+"请确定手机蓝牙是否打开,再尝试将您的手表贴近手机之后重新搜索"="Please make sure the Bluetooth on or not, then put your watch close the phone to search again";
+"重新搜索"="Re search";
+"正在寻找设备"="Searching";
+"开启在身边"="Open'whith me'";
+"请将手机和设备靠近来激活您的蓝牙设备"="Please activate your Bluetooth device with your mobile phone and device.";
+"关闭在身边"="close the connection";
+"成功关闭"="Successfully closed";
+"在身边预警已触发,请确认设备安全"="'with me'warning has been triggered, please confirm the safety of equipment";
+"%@离开在身边范围,请立刻查看处理"="%@'with me' is out of range,please check it immediately";
+
+
+/*----------------------轨迹查看-----------------------*/
+"轨迹查看"="Track view";
+"时间段选择"="Time to choose";
+"开始时间"="Start Time";
+"结束时间"="End Time";
+"确定"="OK";
+"起点:"="Start: ";
+"终点:"="End: ";
+"无轨迹数据!"="No track data!";
+"结束时间不能小于开始时间"="End time is not less than start time";
+
+/*------------------------心率-------------------------*/
+"心率"="Heart rate";
+"建议:"="Advice:";
+"              在此分区中保持交替剧烈运动和非剧烈运动可长一些，每次运动保持在30分钟到60分钟以上（包括日常活动以及打球或者游泳等爱好或者娱乐），通过长期持续的运动习惯，达到改善心血管功能，身体灵活性，身体其他素质，有限有效减肥的效果。"="                  This partition keep alternating strenuous exercise and non violent movement can be longer. Each exercise keep in 30 minutes to 60 minutes or more (including daily activities and play the game of basketball or swimming hobbies or entertainment, through long-term sustained exercise habits to improve cardiovascular function, the flexibility of the body, the body of other qualities, finite effective weight loss effect.";
+"警告"="Warn";
+"日常"="Daily";
+"无"="No";
+"氧"="O";
+"运"="S";
+"动"="Dy";
+"脂"="F";
+"肪"="F";
+"燃"="C";
+"烧"="B";
+"有氧运动"="Osport";
+
+
+

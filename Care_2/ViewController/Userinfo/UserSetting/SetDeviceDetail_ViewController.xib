@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetDeviceDetail_ViewController">
+            <connections>
+                <outlet property="SIMIDTextField" destination="3Xo-y7-6bn" id="svA-9v-EUm"/>
+                <outlet property="heightDone" destination="pHL-nu-Gkr" id="fqx-z4-ga8"/>
+                <outlet property="heightTextField" destination="vzq-3r-R6N" id="MLg-Id-5Of"/>
+                <outlet property="msgLabel" destination="vnW-0E-acl" id="ubE-JA-Umf"/>
+                <outlet property="sexLabel" destination="8mV-JB-CdY" id="LNI-jX-Jzy"/>
+                <outlet property="sexSegmentedBtn" destination="Xgy-rP-Bxk" id="xYb-yc-J8R"/>
+                <outlet property="userNameTextField" destination="kEx-oy-wwT" id="4QX-VC-Yvo"/>
+                <outlet property="view" destination="kJF-TX-xPT" id="f3M-Sa-ZBU"/>
+                <outlet property="weightDone" destination="qfw-Qq-oTV" id="HRb-3H-pmh"/>
+                <outlet property="weightTextField" destination="HOg-7S-5X6" id="9DH-CU-ovj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="kJF-TX-xPT">
+            <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入宝贝的名称" textAlignment="center" minimumFontSize="13" background="02_textField_long" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kEx-oy-wwT" customClass="InsetsTextField">
+                    <rect key="frame" x="16" y="24" width="288" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="NXQ-fc-xId"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="只能是1-8个汉字、字母、数字、或随意组合" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="vnW-0E-acl">
+                    <rect key="frame" x="20" y="54" width="280" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.50196081399917603" green="0.25098040699958801" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入宝贝的体重" textAlignment="center" minimumFontSize="13" background="02_textField_long" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HOg-7S-5X6" customClass="InsetsTextField">
+                    <rect key="frame" x="16" y="219" width="288" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="47B-3l-9eU"/>
+                    </connections>
+                </textField>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Xgy-rP-Bxk">
+                    <rect key="frame" x="87" y="105" width="123" height="29"/>
+                    <segments>
+                        <segment title="男"/>
+                        <segment title="女"/>
+                    </segments>
+                    <color key="tintColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="genderSelect:" destination="-1" eventType="valueChanged" id="XAD-3l-nUk"/>
+                    </connections>
+                </segmentedControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="性别：" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mV-JB-CdY">
+                    <rect key="frame" x="20" y="108" width="65" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入设备的SIM卡号码" textAlignment="center" minimumFontSize="13" background="02_textField_long" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3Xo-y7-6bn" customClass="InsetsTextField">
+                    <rect key="frame" x="16" y="284" width="288" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="gPY-zl-yKD"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入宝贝的身高" textAlignment="center" minimumFontSize="13" background="02_textField_long" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vzq-3r-R6N" customClass="InsetsTextField">
+                    <rect key="frame" x="16" y="157" width="288" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Erp-vq-wR4"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.99215692280000001" blue="0.93333339689999995" alpha="1" colorSpace="deviceRGB"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <point key="canvasLocation" x="238" y="372"/>
+        </view>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="pHL-nu-Gkr">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem title="完成" id="FaP-OE-Rjx">
+                    <inset key="imageInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </barButtonItem>
+            </items>
+            <point key="canvasLocation" x="700" y="341"/>
+        </toolbar>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qfw-Qq-oTV">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem title="完成" id="Cto-WP-e2p">
+                    <inset key="imageInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </barButtonItem>
+            </items>
+            <point key="canvasLocation" x="788" y="151"/>
+        </toolbar>
+    </objects>
+    <resources>
+        <image name="02_textField_long" width="578" height="76"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

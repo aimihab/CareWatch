@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestMapViewController">
+            <connections>
+                <outlet property="_mapView" destination="1aP-3n-oMz" id="fXF-0M-IzY"/>
+                <outlet property="bottomView" destination="ofo-0v-GJv" id="Inj-II-mgC"/>
+                <outlet property="bottonBtn" destination="I3G-OZ-zAz" id="aZX-fS-K3G"/>
+                <outlet property="cancleBtn" destination="VHe-ZZ-9O2" id="KGf-ds-5ok"/>
+                <outlet property="dataPicker" destination="0DO-LV-yE6" id="VCF-Nu-WLS"/>
+                <outlet property="endTimeBtn" destination="GEu-Ug-kZp" id="08a-ab-W52"/>
+                <outlet property="endTimeLabel" destination="EMb-Nk-fNR" id="ZyJ-a5-HHg"/>
+                <outlet property="pickerView" destination="nu4-1i-uGB" id="eGt-1g-WkM"/>
+                <outlet property="selectDatetimeView" destination="hxF-Op-585" id="X5I-ps-ztY"/>
+                <outlet property="startTimeBtn" destination="gtx-f6-2xs" id="WLv-pt-D9M"/>
+                <outlet property="startTimeLabel" destination="0ZX-Vo-PIG" id="t0f-98-O1z"/>
+                <outlet property="sureBtn" destination="31e-4c-4LD" id="Q32-zt-kBK"/>
+                <outlet property="sureTimeBtn" destination="lAz-dV-AjQ" id="icz-Dx-P2r"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-3n-oMz">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="mzD-xe-3t3"/>
+                    </connections>
+                </mapView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="-310" y="154"/>
+        </view>
+        <view contentMode="scaleToFill" id="nu4-1i-uGB" userLabel="pickerView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLz-gu-Sq3">
+                    <rect key="frame" x="8" y="8" width="304" height="184"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31e-4c-4LD">
+                            <rect key="frame" x="52" y="141" width="60" height="30"/>
+                            <color key="backgroundColor" red="0.87450980389999999" green="0.33333333329999998" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="59" id="NhL-hH-mJd"/>
+                                <constraint firstAttribute="height" constant="30" id="gn3-4C-hNi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sureBtnClick:" destination="-1" eventType="touchUpInside" id="fbx-3E-Q1d"/>
+                            </connections>
+                        </button>
+                        <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="0DO-LV-yE6">
+                            <rect key="frame" x="0.0" y="0.0" width="304" height="125"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="125" id="aPv-ry-bhP"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="453523072.88818097">
+                                <!--2015-05-17 02:37:52 +0000-->
+                            </date>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="126270000">
+                                <!--2005-01-01 11:00:00 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
+                                <!--2030-12-31 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHe-ZZ-9O2">
+                            <rect key="frame" x="186" y="141" width="60" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Maf-tv-mRS"/>
+                                <constraint firstAttribute="width" constant="66" id="h7H-nR-NO1"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancleBtnClick:" destination="-1" eventType="touchUpInside" id="Y50-hC-zPy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="VHe-ZZ-9O2" firstAttribute="top" secondItem="0DO-LV-yE6" secondAttribute="bottom" constant="16" id="FbQ-UN-vdc"/>
+                        <constraint firstItem="31e-4c-4LD" firstAttribute="leading" secondItem="rLz-gu-Sq3" secondAttribute="leading" constant="52" id="IcP-0D-ob7"/>
+                        <constraint firstItem="0DO-LV-yE6" firstAttribute="top" secondItem="rLz-gu-Sq3" secondAttribute="top" id="Pep-da-sLX"/>
+                        <constraint firstAttribute="trailing" secondItem="0DO-LV-yE6" secondAttribute="trailing" id="PtR-uS-tgb"/>
+                        <constraint firstItem="0DO-LV-yE6" firstAttribute="leading" secondItem="rLz-gu-Sq3" secondAttribute="leading" id="SCM-Zd-5bT"/>
+                        <constraint firstAttribute="height" constant="184" id="Ufs-H6-i9B"/>
+                        <constraint firstItem="31e-4c-4LD" firstAttribute="top" secondItem="0DO-LV-yE6" secondAttribute="bottom" constant="16" id="cJj-iL-nU4"/>
+                        <constraint firstAttribute="trailing" secondItem="VHe-ZZ-9O2" secondAttribute="trailing" constant="52" id="wcA-k9-DCu"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rLz-gu-Sq3" secondAttribute="trailing" constant="8" id="GKW-sU-NH6"/>
+                <constraint firstItem="rLz-gu-Sq3" firstAttribute="top" secondItem="nu4-1i-uGB" secondAttribute="top" constant="8" id="Muh-Fe-e9J"/>
+                <constraint firstItem="rLz-gu-Sq3" firstAttribute="leading" secondItem="nu4-1i-uGB" secondAttribute="leading" constant="8" id="meB-kz-5HN"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-833" y="576"/>
+        </view>
+        <view contentMode="scaleToFill" id="ofo-0v-GJv" userLabel="bottomView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3G-OZ-zAz">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="时间段选择">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="bottomBtnClick:" destination="-1" eventType="touchUpInside" id="e3e-KN-XLA"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Track.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cqq-QD-yWG">
+                    <rect key="frame" x="0.0" y="0.0" width="43" height="40"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-792" y="116"/>
+        </view>
+        <view contentMode="scaleToFill" id="hxF-Op-585" userLabel="selectDatetimeView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" 开始时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZX-Vo-PIG">
+                    <rect key="frame" x="20" y="19" width="95" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="结束时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-Nk-fNR">
+                    <rect key="frame" x="20" y="65" width="95" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtx-f6-2xs">
+                    <rect key="frame" x="118" y="14" width="171" height="31"/>
+                    <state key="normal" backgroundImage="starttime@2x.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="start_endTimeBtnClick:" destination="-1" eventType="touchUpInside" id="R3u-Jp-DLu"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAz-dV-AjQ" userLabel="sureButton">
+                    <rect key="frame" x="0.0" y="106" width="320" height="40"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="sureTimeBtnClick:" destination="-1" eventType="touchUpInside" id="sd8-4v-isE"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEu-Ug-kZp">
+                    <rect key="frame" x="118" y="61" width="171" height="30"/>
+                    <state key="normal" backgroundImage="endtime@2x.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="start_endTimeBtnClick:" destination="-1" eventType="touchUpInside" id="aFB-r5-egQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-792" y="274.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Track.png" width="44" height="44"/>
+        <image name="endtime@2x.png" width="100" height="76"/>
+        <image name="starttime@2x.png" width="100" height="76"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
